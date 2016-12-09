@@ -1,0 +1,43 @@
+﻿@model Project_Aestus.Models.PhotoViewModels
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>play aestus</title>
+</head>
+<body>
+        <img id="pic" src="" />
+        <p id="country">COUNTRY</p>
+        <h2><p id="coords"></p></h2>
+        <button id="Next" onclick="nextPicture();">Next</button>
+
+            <script type="text/javascript">
+                var photos = @Html.Raw(Json.Encode(Model.Photos));
+                var photoInfo = @Html.Raw(Json.Encode(Model.PhotoGeo));
+                var current = 0;
+                init();
+
+                function init()
+                {
+                    updatePicture();
+                }
+
+                function nextPicture()
+                {
+                    current = current + 1;
+                    updatePicture();
+                }
+
+                function updatePicture()
+                {
+                    document.getElementById("pic").src = photos[current].LargeUrl;
+                    document.getElementById("country").innerText = photoInfo[current].Country.Description;
+                    document.getElementById("coords").innerHTML = "{ " + photoInfo[current].Longitude + ", " + photoInfo[current].Latitude + " }";
+                }
+
+
+            </script>
+</body>
+</html>
