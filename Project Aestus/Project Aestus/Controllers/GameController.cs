@@ -32,7 +32,7 @@ namespace Project_Aestus.Controllers
             PhotoCollection photoCollection = flickr.PhotosSearch(options);
             PlaceInfo[] photoPlaceInfo = new PlaceInfo[photoCollection.Count];
             
-            for(int i = 0; i < 30; i++)
+            for(int i = 0; i < 5; i++)
             {
                 string photoId = photoCollection[i].PhotoId;
                 PlaceInfo currentInfo = flickr.PhotosGeoGetLocation(photoId);

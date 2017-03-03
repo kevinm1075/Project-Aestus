@@ -1,43 +1,29 @@
 ﻿@model Project_Aestus.Models.PhotoViewModels
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjn1iO5xn36fNoS9AkliYU8_hZYV_JKeU"></script>
+    <link rel="stylesheet" href="~/Content/play.css" />
     <title>play aestus</title>
 </head>
 <body>
-        <img id="pic" src="" />
-        <p id="country">COUNTRY</p>
-        <h2><p id="coords"></p></h2>
-        <button id="Next" onclick="nextPicture();">Next</button>
+    <img id="pic" src="" />
+    <p id="country">COUNTRY</p>
+    <h2><p id="coords"></p></h2>
+    <button id="guessButton" onclick="guess();">Guess</button>
+    <h2><p id="guessC"></p></h2>
+    <script type="text/javascript">
+        var photos = @Html.Raw(Json.Encode(Model.Photos));
+        var photoInfo = @Html.Raw(Json.Encode(Model.PhotoGeo));
+    </script>
+    
+  
 
-            <script type="text/javascript">
-                var photos = @Html.Raw(Json.Encode(Model.Photos));
-                var photoInfo = @Html.Raw(Json.Encode(Model.PhotoGeo));
-                var current = 0;
-                init();
-
-                function init()
-                {
-                    updatePicture();
-                }
-
-                function nextPicture()
-                {
-                    current = current + 1;
-                    updatePicture();
-                }
-
-                function updatePicture()
-                {
-                    document.getElementById("pic").src = photos[current].LargeUrl;
-                    document.getElementById("country").innerText = photoInfo[current].Country.Description;
-                    document.getElementById("coords").innerHTML = "{ " + photoInfo[current].Longitude + ", " + photoInfo[current].Latitude + " }";
-                }
-
-
-            </script>
+    <div id="map"></div>
+    <script src="~/Scripts/google.maps.js"></script>
+    <script src="~/Scripts/game.js"></script>
+    <script src="~/Scripts/math.js"></script>
 </body>
 </html>
